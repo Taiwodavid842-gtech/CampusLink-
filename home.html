@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CampusLink - JPTS Networking, Events & Learning Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+            --lecturer: #9b59b6;
+            --student: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+        
+        section {
+            padding: 50px 0;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: #27ae60;
+        }
+        
+        .btn-lecturer {
+            background: var(--lecturer);
+        }
+        
+        .btn-lecturer:hover {
+            background: #8e44ad;
+        }
+        
+        .btn-student {
+            background: var(--student);
+        }
+        
+        .btn-student:hover {
+            background: #e67e22;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+        
+        .badge-lecturer {
+            background-color: var(--lecturer);
+            color: white;
+        }
+        
+        .badge-student {
+            background-color: var(--student);
+            color: white;
+        }
+        
+        .badge-event {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .badge-workshop {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Mobile Menu Styles */
+        .nav-links.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-links.active li {
+            margin: 10px 0;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            color: white;
+            text-align: center;
+            padding: 150px 0 100px;
+            margin-top: 70px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .hero-btns .btn {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background-color: var(--light);
+            padding: 40px 0;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Events Section */
+        .events {
+            background-color: white;
+        }
+        
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .event-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .event-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .event-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .event-date {
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .event-date i {
+            margin-right: 8px;
+        }
+        
+        .event-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .event-card p {
+            color: #666;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .event-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        
+        .event-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Talent Spotlight */
+        .talents {
+            background-color: #f5f7fa;
+        }
+        
+        .profile-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-padding: 15px;
+        }
+        
+        .profile-card {
+            flex: 0 0 280px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            scroll-snap-align: start;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .profile-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            border: 3px solid var(--primary);
+        }
+        
+        .profile-card h4 {
+            margin-bottom: 5px;
+        }
+        
+        .profile-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .profile-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .skill-tag {
+            background: #e0e0e0;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        .profile-card .btn {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+        
+        /* Resources Section */
+        .resources {
+            background-color: white;
+        }
+        
+        .resource-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resource-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .resource-content {
+            padding: 25px;
+        }
+        
+        .resource-card h3 {
+            margin-bottom: 15px;
+        }
+        
+        /* Departments Section */
+        .departments {
+            background-color: #f5f7fa;
+        }
+        
+        .department-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .department-tab {
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .department-tab.active {
+            border-bottom: 3px solid var(--primary);
+            font-weight: 600;
+        }
+        
+        .department-content {
+            display: none;
+        }
+        
+        .department-content.active {
+            display: block;
+        }
+        
+        .department-courses {
+            columns: 2;
+            column-gap: 30px;
+        }
+        
+        .course-list {
+            list-style: none;
+            margin-bottom: 20px;
+            break-inside: avoid;
+        }
+        
+        .course-list h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .course-list li {
+            margin-bottom: 5px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .course-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+        
+        /* Collaboration Callout */
+        .collab-callout {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 10px;
+            margin: 50px 0;
+        }
+        
+        .collab-callout h2 {
+            color: white;
+        }
+        
+        .collab-callout h2::after {
+            background: var(--secondary);
+        }
+        
+        .collab-callout p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            background-color: white;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 30px 20px;
+            background: #f5f7fa;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+        }
+        
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .step h3 {
+            margin-bottom: 15px;
+        }
+        
+        /* Testimonial */
+        .testimonial {
+            background-color: #f5f7fa;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .testimonial-content {
+            max-width: 700px;
+            margin: 0 auto;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #555;
+        }
+        
+        .testimonial-author {
+            margin-top: 20px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        /* Lecturer Features */
+        .lecturer-features {
+            background-color: white;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h3 {
+            color: var(--lecturer);
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-card h3 i {
+            margin-right: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        /* Quick Links Floating Button */
+        .quick-links-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s;
+        }
+        
+        .quick-links-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .quick-links-menu {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 15px;
+            width: 200px;
+            display: none;
+        }
+        
+        .quick-links-menu a {
+            display: block;
+            padding: 8px 0;
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .quick-links-menu a:hover {
+            color: var(--primary);
+        }
+        
+        .quick-links-menu.active {
+            display: block;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1200px) {
+            .container {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .department-courses {
+                columns: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Stack all grid items */
+            .event-grid, 
+            .resource-cards,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Adjust hero section */
+            .hero {
+                padding: 120px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            /* Make profile cards take full width on mobile */
+            .profile-card {
+                flex: 0 0 85%;
+            }
+            
+            /* Adjust department tabs */
+            .department-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                justify-content: flex-start;
+                padding-bottom: 10px;
+            }
+            
+            .department-tab {
+                display: inline-block;
+                margin: 0 5px;
+            }
+
+            /* Navigation adjustments */
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .nav-links.active {
+                top: 70px;
+                padding: 15px;
+            }
+            
+            .nav-links.active li {
+                margin: 8px 0;
+            }
+
+            /* Quick links button */
+            .quick-links-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .quick-links-menu {
+                width: 180px;
+                bottom: 60px;
+            }
+
+            /* Text adjustments */
+            body {
+                font-size: 15px;
+                line-height: 1.5;
+            }
+            
+            p {
+                margin-bottom: 12px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            /* Further reduce padding on small devices */
+            section {
+                padding: 30px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            /* Single column stats */
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Adjust buttons */
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            /* Event card adjustments */
+            .event-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .event-actions .btn {
+                width: 100%;
+            }
+
+            /* Profile scroll adjustments */
+            .profile-scroll {
+                padding: 15px 0;
+                scroll-padding: 15px;
+            }
+            
+            .profile-card {
+                flex: 0 0 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="home.html" class="logo">Campus<span>Link</span></a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="event.html">Events</a></li>
+                    <li><a href="talent.html">Talent Hub</a></li>
+                    <li><a href="collaborate.html">collaboration</a></li>
+                    <li><a href="student profile.html">profile</a></li>
+                   
+                    <li><a href="login.html" class="btn btn-secondary">Login</a></li>
+                </ul>
+                <div class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>JPTS CampusLink: Connect, Learn, Grow</h1>
+            <p>The ultimate academic networking platform for JPTS students and lecturers. Discover events, showcase talents, find collaborators, and access exclusive resources - all in one place.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn btn-student">I'm a Student</a>
+                <a href="#" class="btn btn-lecturer">I'm a Lecturer</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">1,250+</div>
+                    <div class="stat-label">Active Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85+</div>
+                    <div class="stat-label">Lecturers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">120+</div>
+                    <div class="stat-label">Events Monthly</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">300+</div>
+                    <div class="stat-label">Active Projects</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events" id="events">
+        <div class="container">
+            <h2>Upcoming Events & Workshops</h2>
+            <p class="text-center">Discover academic, professional development, and networking opportunities across all departments</p>
+            
+            <div class="event-grid">
+                <div class="event-card">
+                    <img src="images-2.jpeg" alt="Tech Event" class="event-img">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>July 30 | 3:00 PM | Computer Lab 3</span>
+                        </div>
+                        <span class="badge badge-event">Tech</span>
+                        <h3>AI & Machine Learning Workshop</h3>
+                        <p>Hands-on session with Prof. Adebayo on practical applications of AI in business solutions. Open to all Computer Science and Business students.</p>
+                        <div class="event-meta">
+                            <span><i class="fas fa-user"></i> 24/30 spots left</span>
+                            <div class="event-actions">
+                                <a href="#" class="btn">Details</a>
+                                <a href="#" class="btn btn-secondary">Register</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <img src="images-1.jpeg" alt="Business Event" class="event-img">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>August 5 | 10:00 AM | Main Auditorium</span>
+                        </div>
+                        <span class="badge badge-workshop">Workshop</span>
+                        <h3>Startup Funding Strategies</h3>
+                        <p>Learn how to secure funding for your startup from industry experts. Includes pitch practice sessions with feedback from successful entrepreneurs.</p>
+                        <div class="event-meta">
+                            <span><i class="fas fa-user"></i> 12/50 spots left</span>
+                            <div class="event-actions">
+                                <a href="#" class="btn">Details</a>
+                                <a href="#" class="btn btn-secondary">Register</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <img src="images-3.jpeg" alt="Art Event" class="event-img">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>August 12 | 2:00 PM | Creative Arts Center</span>
+                        </div>
+                        <span class="badge">Exhibition</span>
+                        <h3>Annual Student Art Showcase</h3>
+                        <p>Display your creative work and network with visiting artists and gallery owners. All mediums welcome - digital, painting, sculpture, photography.</p>
+                        <div class="event-meta">
+                            <span><i class="fas fa-user"></i> Submission deadline Aug 5</span>
+                            <div class="event-actions">
+                                <a href="#" class="btn">Details</a>
+                                <a href="#" class="btn btn-secondary">Submit Work</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="#" class="btn">View All Events</a>
+                <a href="#" class="btn btn-secondary">Submit Your Event</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Talent Spotlight -->
+    <section class="talents" id="talents">
+        <div class="container">
+            <h2>Talent Spotlight: Meet Your Peers</h2>
+            <p class="text-center">Connect with talented students across departments for collaboration and networking</p>
+            
+            <div class="profile-scroll">
+                <div class="profile-card">
+                    <img src="splendor2.jpg" alt="Student" class="profile-img">
+                    <span class="badge badge-student">Computer Science</span>
+                    <h4>Agala Sunday</h4>
+                    <p>Final Year | GPA: 4.8/5.0</p>
+                    <div class="profile-skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Data Analysis</span>
+                    </div>
+                    <p>Looking for team members for FinTech startup project</p>
+                    <a href="profile.html" class="btn">View Profile</a>
+                </div>
+                
+                <div class="profile-card">
+                    <img src="e.jpg" alt="Student" class="profile-img">
+                    <span class="badge badge-student">Business Admin</span>
+                    <h4>Michael Chen</h4>
+                    <p>3rd Year | GPA: 4.5/5.0</p>
+                    <div class="profile-skills">
+                        <span class="skill-tag">Marketing</span>
+                        <span class="skill-tag">SEO</span>
+                        <span class="skill-tag">Social Media</span>
+                    </div>
+                    <p>Seeking technical co-founder for e-commerce platform</p>
+                    <a href="profile.html" class="btn">View Profile</a>
+                </div>
+                
+                <div class="profile-card">
+                    <img src="vose.jpg" alt="Student" class="profile-img">
+                    <span class="badge badge-student">Graphic Design</span>
+                    <h4>Emmanuel vose</h4>
+                    <p>4th Year | GPA: 4.7/5.0</p>
+                    <div class="profile-skills">
+                        <span class="skill-tag">UI/UX</span>
+                        <span class="skill-tag">Illustration</span>
+                        <span class="skill-tag">Branding</span>
+                    </div>
+                    <p>Available for freelance design projects</p>
+                    <a href="profile.html" class="btn">View Profile</a>
+                </div>
+                
+                <div class="profile-card">
+                    <img src="Dav.jpg" alt="Student" class="profile-img">
+                    <span class="badge badge-student">Engineering</span>
+                    <h4>Taiwo David</h4>
+                    <p>Final Year | GPA: 4.9/5.0</p>
+                    <div class="profile-skills">
+                        <span class="skill-tag">Robotics</span>
+                        <span class="skill-tag">Arduino</span>
+                        <span class="skill-tag">3D Printing</span>
+                    </div>
+                    <p>Building smart home devices - looking for testers</p>
+                    <a href="profile.html" class="btn">View Profile</a>
+                </div>
+                
+                <div class="profile-card">
+                    <img src="oche.jpg" alt="Student" class="profile-img">
+                    <span class="badge badge-student">web developer </span>
+                    <h4>oche </h4>
+                    <p>3rd Year | GPA: 4.6/5.0</p>
+                    <div class="profile-skills">
+                        <span class="skill-tag">Writing</span>
+                        <span class="skill-tag">Photography</span>
+                        <span class="skill-tag">Video Editing</span>
+                    </div>
+                    <p>Starting campus news podcast - need co-hosts</p>
+                    <a href="profile.html" class="btn">View Profile</a>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 30px;">
+                <a href="#" class="btn">Browse All Profiles</a>
+                <a href="#" class="btn btn-secondary">Create Your Profile</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources" id="resources">
+        <div class="container">
+            <h2>Academic Resources</h2>
+            <p class="text-center">Access study materials, research papers, and learning tools shared by lecturers and students</p>
+            
+            <div class="resource-cards">
+                <div class="resource-card">
+                    <div class="resource-content">
+                        <div class="resource-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Course Materials</h3>
+                        <p>Access lecture notes, slides, and reading materials for all departments. Organized by course code and semester.</p>
+                        <a href="#" class="btn">Browse Materials</a>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-content">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Past Papers</h3>
+                        <p>Repository of examination papers from previous years with model answers. Perfect for exam preparation.</p>
+                        <a href="#" class="btn">View Past Papers</a>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-content">
+                        <div class="resource-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3>Project Archive</h3>
+                        <p>Browse outstanding student projects from previous years for inspiration and reference.</p>
+                        <a href="#" class="btn">Explore Projects</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Departments Section -->
+    <section class="departments" id="departments">
+        <div class="container">
+            <h2>Academic Departments</h2>
+            <p class="text-center">Connect with students and lecturers within your department or explore interdisciplinary opportunities</p>
+            
+            <div class="department-tabs">
+                <button class="department-tab active" data-tab="engineering">Engineering</button>
+                <button class="department-tab" data-tab="business">Business</button>
+                <button class="department-tab" data-tab="computing">Computing</button>
+                <button class="department-tab" data-tab="arts">Creative Arts</button>
+                <button class="department-tab" data-tab="sciences">Applied Sciences</button>
+            </div>
+            
+            <div class="department-content active" id="engineering">
+                <h3>Faculty of Engineering & Technology</h3>
+                <p>Our engineering programs combine theoretical knowledge with practical applications, preparing students for the technological challenges of tomorrow.</p>
+                
+                <div class="department-courses">
+                    <ul class="course-list">
+                        <h4>Undergraduate Programs</h4>
+                        <li>B.Eng. Mechanical Engineering</li>
+                        <li>B.Eng. Electrical/Electronic Engineering</li>
+                        <li>B.Eng. Civil Engineering</li>
+                        <li>B.Eng. Computer Engineering</li>
+                    </ul>
+                    
+                    <ul class="course-list">
+                        <h4>Postgraduate Programs</h4>
+                        <li>M.Sc. Renewable Energy Systems</li>
+                        <li>M.Eng. Structural Engineering</li>
+                        <li>Ph.D. Engineering</li>
+                    </ul>
+                    
+                    <ul class="course-list">
+                        <h4>Research Areas</h4>
+                        <li>Smart Materials</li>
+                        <li>Robotics & Automation</li>
+                        <li>Sustainable Infrastructure</li>
+                        <li>Energy Systems</li>
+                    </ul>
+                    
+                    <ul class="course-list">
+                        <h4>Department Resources</h4>
+                        <li>Engineering Workshops</li>
+                        <li>CAD/CAM Lab</li>
+                        <li>Materials Testing Lab</li>
+                        <li>Industry Partnerships</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="department-content" id="business">
+                <h3>Faculty of Business & Management</h3>
+                <p>Developing future business leaders through innovative programs that combine academic rigor with real-world applications.</p>
+                
+                <div class="department-courses">
+                    <ul class="course-list">
+                        <h4>Undergraduate Programs</h4>
+                        <li>B.Sc. Business Administration</li>
+                        <li>B.Sc. Accounting</li>
+                        <li>B.Sc. Banking & Finance</li>
+                        <li>B.Sc. Marketing</li>
+                    </ul>
+                    
+                    <ul class="course-list">
+                        <h4>Postgraduate Programs</h4>
+                        <li>MBA Executive</li>
+                        <li>M.Sc. Finance</li>
+                        <li>M.Sc. Human Resource Management</li>
+                        <li>Ph.D. Business Administration</li>
+                    </ul>
+                    
+                    <ul class="course-list">
+                        <h4>Research Centers</h4>
+                        <li>Center for Entrepreneurship</li>
+                        <li>Digital Business Lab</li>
+                        <li>Financial Analytics Unit</li>
+                    </ul>
+                    
+                    <ul class="course-list">
+                        <h4>Student Opportunities</h4>
+                        <li>Business Incubator</li>
+                        <li>Investment Club</li>
+                        <li>Case Competition Teams</li>
+                        <li>Industry Mentorship</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Other department contents would follow the same pattern -->
+            
+            <div class="text-center" style="margin-top: 30px;">
+                <a href="#" class="btn">Department Portals</a>
+                <a href="#" class="btn btn-secondary">Interdisciplinary Groups</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collaboration Callout -->
+    <section>
+        <div class="container">
+            <div class="collab-callout">
+                <h2>Project Collaboration Hub</h2>
+                <p>Find your perfect project team or showcase your work to potential collaborators. Our matching algorithm helps connect students with complementary skills across departments.</p>
+                <div style="display: flex; gap: 15px; justify-content: center;">
+                    <a href="#" class="btn btn-secondary">Find Collaborators</a>
+                    <a href="#" class="btn">Post Your Project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lecturer Features -->
+    <section class="lecturer-features" id="lecturers">
+        <div class="container">
+            <h2>For Lecturers & Faculty</h2>
+            <p class="text-center">Tools and features designed to enhance teaching, research, and student engagement</p>
+            
+            <div class="steps">
+                <div class="feature-card">
+                    <h3><i class="fas fa-chalkboard-teacher"></i> Course Management</h3>
+                    <p>Easily upload lecture materials, create assignments, and track student submissions. Integrated calendar shows all your teaching commitments.</p>
+                    <a href="#" class="btn btn-lecturer">Access Courses</a>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-users"></i> Student Engagement</h3>
+                    <p>Monitor student participation, identify at-risk students, and communicate directly through the platform. Analytics show class performance trends.</p>
+                    <a href="#" class="btn btn-lecturer">View Analytics</a>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-flask"></i> Research Collaboration</h3>
+                    <p>Connect with colleagues across departments for interdisciplinary research. Find students with relevant skills for your research projects.</p>
+                    <a href="#" class="btn btn-lecturer">Explore Research</a>
+                </div>
+            </div>
+            
+            <div style="margin-top: 50px;">
+                <h3>Academic Office Tools</h3>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <h3>Schedule Builder</h3>
+                        <p>Plan your semester schedule with conflict checking and room availability.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <h3>Thesis Supervision</h3>
+                        <p>Manage your thesis students with milestone tracking and feedback tools.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-file-signature"></i></div>
+                        <h3>Assessment Tools</h3>
+                        <p>Create rubrics, grade assignments, and provide feedback efficiently.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2>Getting Started with CampusLink</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">1</div>
+                    <h3>Create Your Profile</h3>
+                    <p>Students: Highlight your skills, interests, and academic achievements. Lecturers: Showcase your research, courses, and availability.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">2</div>
+                    <h3>Connect & Explore</h3>
+                    <p>Join your department community, discover events, and browse resources tailored to your academic needs.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">3</div>
+                    <h3>Collaborate & Grow</h3>
+                    <p>Form project teams, join study groups, or find research opportunities that match your goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial">
+        <div class="container">
+            <div class="testimonial-content">
+                "As a lecturer, CampusLink has transformed how I interact with students outside the classroom. I can easily share resources, identify students for research projects, and track their progress across different courses. The platform has significantly improved student engagement in my department."
+            </div>
+            <div class="testimonial-author">
+                — Dr. Amina Okafor, Head of Computer Science Department
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CampusLink</h3>
+                    <p>The official academic networking platform of JPTS, connecting students, lecturers, and resources across all departments.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Academic Calendar</a></li>
+                        <li><a href="#">Library Resources</a></li>
+                        <li><a href="#">Career Services</a></li>
+                        <li><a href="#">Student Support</a></li>
+                        <li><a href="#">IT Help Desk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                        <li><a href="#">Contact Administrators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> JPTS Main Campus, Lagos</li>
+                        <li><i class="fas fa-phone"></i> +234 800 000 0000</li>
+                        <li><i class="fas fa-envelope"></i> campuslink@jpts.edu.ng</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8:00AM - 5:00PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 CampusLink - JPTS Polytechnic. All rights reserved. | <a href="#" style="color: #bbb;">Privacy Policy</a> | <a href="#" style="color: #bbb;">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Quick Links Button -->
+    <div class="quick-links-btn" id="quickLinksBtn">
+        <i class="fas fa-plus"></i>
+        <div class="quick-links-menu" id="quickLinksMenu">
+            <a href="#"><i class="fas fa-calendar-alt"></i> Events</a>
+            <a href="#"><i class="fas fa-users"></i> Find Collaborators</a>
+            <a href="#"><i class="fas fa-book"></i> Resources</a>
+            <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Functionality
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            
+            // Change icon from bars to times when open
+            const icon = this.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenu.querySelector('i').classList.remove('fa-times');
+                mobileMenu.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // Auto-scroll for talent profiles
+        const profileScroll = document.querySelector('.profile-scroll');
+        let scrollAmount = 0;
+        const scrollStep = 270; // Width of profile card + gap
+        
+        setInterval(() => {
+            profileScroll.scrollTo({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+            scrollAmount += scrollStep;
+            if (scrollAmount >= profileScroll.scrollWidth - profileScroll.clientWidth) {
+                scrollAmount = 0;
+            }
+        }, 3000);
+        
+        // Department tabs functionality
+        const departmentTabs = document.querySelectorAll('.department-tab');
+        departmentTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.department-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.department-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Quick links button functionality
+        const quickLinksBtn = document.getElementById('quickLinksBtn');
+        const quickLinksMenu = document.getElementById('quickLinksMenu');
+        
+        quickLinksBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            quickLinksMenu.classList.toggle('active');
+            
+            // Change icon
+            const icon = quickLinksBtn.querySelector('i');
+            if (quickLinksMenu.classList.contains('active')) {
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-plus');
+            }
+        });
+        
+        // Close quick links when clicking elsewhere
+        document.addEventListener('click', (e) => {
+            if (quickLinksMenu.classList.contains('active') && e.target !== quickLinksMenu && !quickLinksMenu.contains(e.target)) {
+                quickLinksMenu.classList.remove('active');
+                quickLinksBtn.querySelector('i').classList.remove('fa-times');
+                quickLinksBtn.querySelector('i').classList.add('fa-plus');
+            }
+        });
+    </script>
+</body>
+</html>
