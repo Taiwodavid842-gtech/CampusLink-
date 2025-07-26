@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Talent Hub | CampusLink - JPTS Networking Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+            --lecturer: #9b59b6;
+            --student: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--dark);
+        }
+        
+        /* Hero Section */
+        .talent-hero {
+            background: linear-gradient(135deg, var(--lecturer), var(--primary));
+            color: white;
+            text-align: center;
+            padding: 150px 0 80px;
+            margin-top: 70px;
+        }
+        
+        .talent-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .talent-hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .search-bar button:hover {
+            background: #2980b9;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: #27ae60;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-lecturer {
+            background: var(--lecturer);
+        }
+        
+        .btn-lecturer:hover {
+            background: #8e44ad;
+        }
+        
+        .btn-student {
+            background: var(--student);
+        }
+        
+        .btn-student:hover {
+            background: #e67e22;
+        }
+        
+        /* Badges & Tags */
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+        
+        .badge-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .badge-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .badge-accent {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .badge-lecturer {
+            background-color: var(--lecturer);
+            color: white;
+        }
+        
+        .badge-student {
+            background-color: var(--student);
+            color: white;
+        }
+        
+        .skill-tag {
+            background: #f0f7ff;
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+        }
+        
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Talent Filter */
+        .talent-filter {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group h3 {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .filter-tag {
+            background: #f0f0f0;
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-tag:hover, .filter-tag.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Talent Grid */
+        .talent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .talent-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .talent-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .talent-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .talent-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .talent-name {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .talent-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .talent-title {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+        
+        .talent-location {
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .talent-location i {
+            margin-right: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .talent-bio {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            flex: 1;
+        }
+        
+        .talent-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .talent-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .connection-status {
+            font-size: 0.8rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+        }
+        
+        .connection-status i {
+            margin-right: 5px;
+            color: var(--secondary);
+        }
+        
+        /* Talent Tabs */
+        .talent-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin: 30px 0 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .talent-tab {
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            position: relative;
+            border: none;
+            background: none;
+        }
+        
+        .talent-tab.active {
+            color: var(--primary);
+        }
+        
+        .talent-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .talent-tab .badge {
+            background: var(--accent);
+            color: white;
+            border-radius: 10px;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            margin-left: 5px;
+        }
+        
+        /* Featured Talent */
+        .featured-talent {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .featured-talent h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .featured-card {
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .featured-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .featured-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            border: 3px solid var(--primary);
+        }
+        
+        .featured-name {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .featured-title {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .featured-skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .empty-state h3 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        /* Call to Action */
+        .cta-section {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 10px;
+            margin: 50px 0;
+        }
+        
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .talent-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .talent-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .talent-hero p {
+                font-size: 1rem;
+            }
+            
+            .featured-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .talent-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-options {
+                flex-direction: column;
+            }
+            
+            .filter-group {
+                min-width: 100%;
+            }
+            
+            .talent-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .talent-actions .btn {
+                width: 100%;
+            }
+            
+            .search-bar input {
+                padding: 12px 15px;
+            }
+            
+            .search-bar button {
+                padding: 8px 15px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .nav-links {
+                display: flex !important;
+            }
+            .mobile-menu {
+                display: none !important;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .fade-out {
+            animation: fadeOut 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="home.html" class="logo">Campus<span>Link</span></a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="event.html">Events</a></li>
+                    <li><a href="talent.html" class="active">Talent Hub</a></li>
+                    <li><a href="collaborate.html">Collaborate</a></li>
+                    
+                      <li><a href="student profile.html" class="btn btn-secondary btn-sm">profile </a></li>
+                    
+                    
+                    <li><a href="login.html" class="btn btn-secondary btn-sm">Login</a></li>
+                </ul>
+                <button class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="talent-hero">
+        <div class="container">
+            <h1>Discover Campus Talent</h1>
+            <p>Connect with skilled students, alumni, and faculty across various disciplines and departments</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Search by name, skills, department, or interests...">
+                <button><i class="fas fa-search"></i> Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Talent Filter -->
+        <section class="talent-filter">
+            <h2>Find the Right Talent</h2>
+            <div class="filter-options">
+                <div class="filter-group">
+                    <h3>Department</h3>
+                    <select class="filter-select">
+                        <option>All Departments</option>
+                        <option>Computer Science</option>
+                        <option>Business</option>
+                        <option>Engineering</option>
+                        <option>Arts & Design</option>
+                        <option>Health Sciences</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h3>Skill Level</h3>
+                    <select class="filter-select">
+                        <option>Any Level</option>
+                        <option>Beginner</option>
+                        <option>Intermediate</option>
+                        <option>Advanced</option>
+                        <option>Expert</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h3>Availability</h3>
+                    <select class="filter-select">
+                        <option>Any Availability</option>
+                        <option>Available Now</option>
+                        <option>Part-time</option>
+                        <option>Project Basis</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-tags">
+                <span class="filter-tag active">All</span>
+                <span class="filter-tag">Web Development</span>
+                <span class="filter-tag">UI/UX Design</span>
+                <span class="filter-tag">Data Science</span>
+                <span class="filter-tag">Digital Marketing</span>
+                <span class="filter-tag">Graphic Design</span>
+                <span class="filter-tag">Mobile App Dev</span>
+            </div>
+        </section>
+
+        <!-- Talent Tabs -->
+        <div class="talent-tabs">
+            <button class="talent-tab active" data-tab="all">All Talent</button>
+            <button class="talent-tab" data-tab="students">Students</button>
+            <button class="talent-tab" data-tab="alumni">Alumni</button>
+            <button class="talent-tab" data-tab="faculty">Faculty</button>
+            <button class="talent-tab" data-tab="my-connections">My Connections <span class="badge">3</span></button>
+        </div>
+
+        <!-- Featured Talent -->
+        <section class="featured-talent">
+            <h2>Featured Talent</h2>
+            <div class="featured-grid">
+                <!-- Featured 1 -->
+                <div class="featured-card">
+                    <img src="splendor2.jpg" alt="Sarah Johnson" class="featured-avatar">
+                    <h3 class="featured-name">Agala Sunday </h3>
+                    <p class="featured-title">Computer Science Senior</p>
+                    <div class="featured-skills">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                    </div>
+                    <a href="profile.html" class="btn btn-outline btn-sm">View Profile</a>
+                </div>
+                
+                <!-- Featured 2 -->
+                <div class="featured-card">
+                    <img src="e.jpg" alt="Michael Chen" class="featured-avatar">
+                    <h3 class="featured-name">Johnny Emmanuel </h3>
+                    <p class="featured-title">Business Analytics '22</p>
+                    <div class="featured-skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">SQL</span>
+                    </div>
+                    <a href="profile.html" class="btn btn-outline btn-sm">View Profile</a>
+                </div>
+                
+                <!-- Featured 3 -->
+                <div class="featured-card">
+                    <img src="vose.jpg      " alt="Emma Rodriguez" class="featured-avatar">
+                    <h3 class="featured-name">Emma Rodriguez</h3>
+                    <p class="featured-title">Graphic Design Junior</p>
+                    <div class="featured-skills">
+                        <span class="skill-tag">UI/UX</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Illustration</span>
+                    </div>
+                    <a href="profile.html" class="btn btn-outline btn-sm">View Profile</a>
+                </div>
+                
+                <!-- Featured 4 -->
+                <div class="featured-card">
+                    <img src="oche2.jpg" alt="David Kim" class="featured-avatar">
+                    <h3 class="featured-name">David Kim</h3>
+                    <p class="featured-title">Engineering Professor</p>
+                    <div class="featured-skills">
+                        <span class="skill-tag">Robotics</span>
+                        <span class="skill-tag">AI</span>
+                        <span class="skill-tag">Research</span>
+                    </div>
+                    <a href="profile.html" class="btn btn-outline btn-sm">View Profile</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Talent Grid -->
+        <div id="all-talent" class="talent-section">
+            <div class="talent-grid">
+                <!-- Talent 1 -->
+                <div class="talent-card">
+                    <img src="Dav.jpg" alt="sarah"" class="talent-image">
+                    <div class="talent-content">
+                        <h3 class="talent-name">SmDav</h3>
+                        <div class="talent-meta">
+                            <span class="talent-title">Computer Science Senior</span>
+                            <span class="talent-location"><i class="fas fa-map-marker-alt"></i> Lagos</span>
+                        </div>
+                        <p class="talent-bio">Full-stack developer with experience building web applications using React, Node.js, and MongoDB. Looking for internship opportunities.</p>
+                        <div class="talent-skills">
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">API Development</span>
+                        </div>
+                        <div class="talent-actions">
+                            <a href="profile.html" class="btn btn-outline">View Profile</a>
+                            <a href="#" class="btn">Connect</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Talent 2 -->
+                <div class="talent-card">
+                    <img src="oche2.jpg " alt="Michael Chen" class="talent-image">
+                    <div class="talent-content">
+                        <h3 class="talent-name">Michael Chen</h3>
+                        <div class="talent-meta">
+                            <span class="talent-title">Business Analytics '22</span>
+                            <span class="talent-location"><i class="fas fa-map-marker-alt"></i> Abuja</span>
+                        </div>
+                        <p class="talent-bio">Data analyst with expertise in Python, SQL, and Tableau. Passionate about helping businesses make data-driven decisions.</p>
+                        <div class="talent-skills">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Tableau</span>
+                            <span class="skill-tag">Data Visualization</span>
+                            <span class="skill-tag">Machine Learning</span>
+                        </div>
+                        <div class="talent-actions">
+                            <a href="profile.html" class="btn btn-outline">View Profile</a>
+                            <a href="#" class="btn">Connect</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Talent 3 -->
+                <div class="talent-card">
+                    <img src="e.jpg" alt="graphic design " class="talent-image">
+                    <div class="talent-content">
+                        <h3 class="talent-name">Emma Rodriguez</h3>
+                        <div class="talent-meta">
+                            <span class="talent-title">Graphic Design Junior</span>
+                            <span class="talent-location"><i class="fas fa-map-marker-alt"></i> Port Harcourt</span>
+                        </div>
+                        <p class="talent-bio">UI/UX designer with a passion for creating intuitive digital experiences. Proficient in Figma, Adobe XD, and user research methods.</p>
+                        <div class="talent-skills">
+                            <span class="skill-tag">UI/UX Design</span>
+                            <span class="skill-tag">Figma</span>
+                            <span class="skill-tag">Adobe XD</span>
+                            <span class="skill-tag">User Research</span>
+                            <span class="skill-tag">Prototyping</span>
+                        </div>
+                        <div class="talent-actions">
+                            <a href="profile.html" class="btn btn-outline">View Profile</a>
+                            <a href="#" class="btn">Connect</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Talent 4 -->
+                <div class="talent-card">
+                    <img src="splendor.jpg" alt="sunday" class="talent-image">
+                    <div class="talent-content">
+                        <h3 class="talent-name">Prof. David Kim</h3>
+                        <div class="talent-meta">
+                            <span class="talent-title">Engineering Department</span>
+                            <span class="talent-location"><i class="fas fa-map-marker-alt"></i> Campus</span>
+                        </div>
+                        <p class="talent-bio">Professor of Robotics and AI with 10+ years of research experience. Available for consulting and research collaborations.</p>
+                        <div class="talent-skills">
+                            <span class="skill-tag">Robotics</span>
+                            <span class="skill-tag">Artificial Intelligence</span>
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Research</span>
+                            <span class="skill-tag">Mentoring</span>
+                        </div>
+                        <div class="talent-actions">
+                            <a href="profile.html" class="btn btn-outline">View Profile</a>
+                            <a href="#" class="btn">Connect</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Talent 5 -->
+                <div class="talent-card">
+                    <img src="j.jpg" alt="Jessica Williams" class="talent-image">
+                    <div class="talent-content">
+                        <h3 class="talent-name">Jessica Williams</h3>
+                        <div class="talent-meta">
+                            <span class="talent-title">Computer Science '21</span>
+                            <span class="talent-location"><i class="fas fa-map-marker-alt"></i> Remote</span>
+                        </div>
+                        <p class="talent-bio">Frontend developer specializing in React and Vue.js. Currently working as a freelancer and open to new projects.</p>
+                        <div class="talent-skills">
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Vue.js</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">Responsive Design</span>
+                        </div>
+                        <div class="talent-actions">
+                            <a href="profile.html" class="btn btn-outline">View Profile</a>
+                            <a href="#" class="btn">Connect</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Talent 6 -->
+                <div class="talent-card">
+                    <img src="v2.jpg" alt="Daniel Brown" class="talent-image">
+                    <div class="talent-content">
+                        <h3 class="talent-name">Daniel Brown</h3>
+                        <div class="talent-meta">
+                            <span class="talent-title">Marketing Senior</span>
+                            <span class="talent-location"><i class="fas fa-map-marker-alt"></i> Lagos</span>
+                        </div>
+                        <p class="talent-bio">Digital marketing specialist with expertise in social media strategy, content creation, and brand development.</p>
+                        <div class="talent-skills">
+                            <span class="skill-tag">Digital Marketing</span>
+                            <span class="skill-tag">Social Media</span>
+                            <span class="skill-tag">Content Creation</span>
+                            <span class="skill-tag">SEO</span>
+                            <span class="skill-tag">Brand Strategy</span>
+                        </div>
+                        <div class="talent-actions">
+                            <a href="profile.html" class="btn btn-outline">View Profile</a>
+                            <a href="#" class="btn">Connect</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="#" class="btn btn-outline">Load More Talent</a>
+            </div>
+        </div>
+
+        <!-- Students Section -->
+        <div id="students-talent" class="talent-section" style="display: none;">
+            <div class="empty-state">
+                <i class="fas fa-user-graduate"></i>
+                <h3>No Student Results</h3>
+                <p>Adjust your filters to find student talent matching your criteria</p>
+                <a href="#" class="btn">Reset Filters</a>
+            </div>
+        </div>
+
+        <!-- Alumni Section -->
+        <div id="alumni-talent" class="talent-section" style="display: none;">
+            <div class="empty-state">
+                <i class="fas fa-user-tie"></i>
+                <h3>No Alumni Results</h3>
+                <p>Try broadening your search to find alumni talent</p>
+                <a href="#" class="btn">Reset Filters</a>
+            </div>
+        </div>
+
+        <!-- Faculty Section -->
+        <div id="faculty-talent" class="talent-section" style="display: none;">
+            <div class="empty-state">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>No Faculty Results</h3>
+                <p>Adjust your filters to find faculty members</p>
+                <a href="#" class="btn">Reset Filters</a>
+            </div>
+        </div>
+
+        <!-- My Connections Section -->
+        <div id="connections-talent" class="talent-section" style="display: none;">
+            <div class="empty-state">
+                <i class="fas fa-users"></i>
+                <h3>Login to View Connections</h3>
+                <p>Connect with your peers by logging into your CampusLink account</p>
+                <div style="display: flex; gap: 15px; justify-content: center;">
+                    <a href="login.html" class="btn btn-student">Student Login</a>
+                    
+                                        <a href="login.html" class="btn btn-lecturer">Lecturer Login</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <h2>Ready to Showcase Your Talent?</h2>
+            <p>Create your profile to connect with peers, find collaborators, and discover opportunities that match your skills and interests.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="register.html" class="btn btn-student">Student Sign Up</a>
+                <a href="register.html" class="btn btn-lecturer">Lecturer Sign Up</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CampusLink</h3>
+                    <p>Connecting talent, fostering collaboration, and building community across JPTS campuses.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="talent.html">Talent Hub</a></li>
+                        <li><a href="collaborate.html">Collaborate</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on events and opportunities.</p>
+                    <div class="search-bar" style="margin-top: 15px;">
+                        <input type="email" placeholder="Your email address">
+                        <button style="top: 3px; right: 3px; padding: 8px 15px;"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 CampusLink - JPTS Networking Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Tab Switching Functionality
+        const tabs = document.querySelectorAll('.talent-tab');
+        const talentSections = {
+            'all': document.getElementById('all-talent'),
+            'students': document.getElementById('students-talent'),
+            'alumni': document.getElementById('alumni-talent'),
+            'faculty': document.getElementById('faculty-talent'),
+            'my-connections': document.getElementById('connections-talent')
+        };
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Hide all talent sections
+                Object.values(talentSections).forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show the selected talent section
+                const tabName = tab.getAttribute('data-tab');
+                talentSections[tabName].style.display = 'block';
+            });
+        });
+        
+        // Filter Tag Toggle
+        const filterTags = document.querySelectorAll('.filter-tag');
+        filterTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                filterTags.forEach(t => t.classList.remove('active'));
+                tag.classList.add('active');
+                // Here you would typically filter the talent cards
+                // based on the selected tag
+            });
+        });
+        
+        // Animation for cards on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.talent-card, .featured-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
