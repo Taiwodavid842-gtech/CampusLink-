@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | JPTS CampusLink</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --secondary: #3f37c9;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --gray: #adb5bd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            display: flex;
+            min-height: 100vh;
+            color: var(--dark);
+        }
+
+        .login-container {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Branding Panel */
+        .branding-panel {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .branding-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') center/cover;
+            opacity: 0.15;
+        }
+
+        .branding-content {
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Logo Styling */
+        .header-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 60px;
+            width: auto;
+        }
+        
+        .platform-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .branding-panel h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .branding-panel p {
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .features-list li {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* Login Form Panel */
+        .login-panel {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mobile-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .login-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .login-header p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            outline: none;
+        }
+
+        .password-field {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            cursor: pointer;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+            accent-color: var(--primary);
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #eee;
+        }
+
+        .divider::before {
+            margin-right: 1rem;
+        }
+
+        .divider::after {
+            margin-left: 1rem;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            color: var(--dark);
+            border: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            background: #f5f5f5;
+            transform: translateY(-2px);
+        }
+
+        .social-btn i {
+            font-size: 1.2rem;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .register-link a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 992px) {
+            .branding-panel {
+                display: flex;
+            }
+            
+            .mobile-logo {
+                display: none;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .login-card {
+                padding: 2rem;
+            }
+            
+            .logo-img {
+                height: 50px;
+            }
+            
+            .platform-name {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .login-card {
+                padding: 1.5rem;
+            }
+            
+            .form-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .logo-img {
+                height: 45px;
+            }
+            
+            .mobile-logo img {
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Branding Panel (Visible on desktop) -->
+        <div class="branding-panel">
+            <div class="branding-content">
+                <div class="header-logo">
+                    <img src="j.jpeg" alt="JPTS Logo" class="logo-img">
+                    <span class="platform-name">CampusLink</span>
+                </div>
+                
+                <h2>Welcome to JPTS Networking Platform</h2>
+                <p>Connect with students, faculty, and alumni to collaborate on projects, research, and academic initiatives.</p>
+                
+                <ul class="features-list">
+                    <li>
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <h3>Academic Network</h3>
+                            <p>Build connections across departments and disciplines</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div>
+                            <h3>Collaboration Tools</h3>
+                            <p>Manage group projects and research teams</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Campus Events</h3>
+                            <p>Stay updated on academic and professional events</p>
+                        </div>
+                    </li>
+                </ul>
+                
+                <p>New to CampusLink? <a href="register.html" style="color: white; font-weight: 600;">Create an account</a></p>
+            </div>
+        </div>
+        
+        <!-- Login Form Panel -->
+        <div class="login-panel">
+            <div class="login-card">
+                <!-- Mobile Logo (Visible only on mobile) -->
+                <div class="mobile-logo">
+                    <img src="jpts-logo.png" alt="JPTS Logo" class="logo-img">
+                </div>
+                
+                <div class="login-header">
+                    <h1>Sign In</h1>
+                    <p>JPTS Networking Platform</p>
+                </div>
+                
+                <form class="login-form" id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="student@jpts.edu" required>
+                    </div>
+                    
+                    <div class="form-group password-field">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+                    </div>
+                    
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <a href="forgot-password.html" class="forgot-password">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="loginBtn">Sign In</button>
+                    
+                    <div class="divider">or continue with</div>
+                    
+                    <div class="social-login">
+                        <button type="button" class="social-btn" title="Sign in with Google">
+                            <i class="fab fa-google"></i>
+                        </button>
+                        <button type="button" class="social-btn" title="Sign in with Microsoft">
+                            <i class="fab fa-microsoft"></i>
+                        </button>
+                        <button type="button" class="social-btn" title="Sign in with Apple">
+                            <i class="fab fa-apple"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="register-link">
+                        Don't have an account? <a href="register.html">Sign up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Password Visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+        
+        // Form Submission
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('remember').checked;
+            
+            // Validate email format
+            if (!email.endsWith('@jpts.edu')) {
+                alert('Please use your JPTS email address');
+                return;
+            }
+            
+            // Show loading state
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+            loginBtn.disabled = true;
+            
+            // Simulate API call (replace with actual authentication)
+            setTimeout(() => {
+                // On successful login, redirect to home page
+                window.location.href = 'home.html';
+                
+                // Reset button state (in case of error)
+                loginBtn.innerHTML = 'Sign In';
+                loginBtn.disabled = false;
+            }, 1500);
+        });
+        
+        // Social Login Buttons
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const provider = this.querySelector('i').className.split(' ')[1].replace('fa-', '');
+                alert(`This would authenticate with ${provider} in a live environment`);
+            });
+        });
+    </script>
+</body>
+</html>
