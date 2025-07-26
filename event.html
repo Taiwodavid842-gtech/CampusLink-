@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Events | CampusLink - JPTS Networking & Events</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+            --lecturer: #9b59b6;
+            --student: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+        
+        section {
+            padding: 40px 0;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .events-hero {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            color: white;
+            text-align: center;
+            padding: 150px 0 80px;
+            margin-top: 70px;
+        }
+        
+        .events-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .events-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .search-bar button:hover {
+            background: #2980b9;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: #27ae60;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-lecturer {
+            background: var(--lecturer);
+        }
+        
+        .btn-lecturer:hover {
+            background: #8e44ad;
+        }
+        
+        .btn-student {
+            background: var(--student);
+        }
+        
+        .btn-student:hover {
+            background: #e67e22;
+        }
+        
+        /* Badges & Tags */
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+        
+        .badge-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .badge-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .badge-accent {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .badge-lecturer {
+            background-color: var(--lecturer);
+            color: white;
+        }
+        
+        .badge-student {
+            background-color: var(--student);
+            color: white;
+        }
+        
+        .event-tag {
+            background: #f0f7ff;
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        /* Events Filter */
+        .events-filter {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group h3 {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+        }
+        
+        /* Events Grid */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .event-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .event-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .event-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .event-date {
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .event-date i {
+            margin-right: 8px;
+        }
+        
+        .event-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+        
+        .event-card p {
+            color: #666;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+        
+        .event-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .event-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .event-creator {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .creator-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        
+        .creator-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+        
+        .creator-info p {
+            font-size: 0.8rem;
+            color: #666;
+            margin: 0;
+        }
+        
+        /* Events Tabs */
+        .events-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin: 30px 0 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .events-tab {
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            position: relative;
+            border: none;
+            background: none;
+        }
+        
+        .events-tab.active {
+            color: var(--primary);
+        }
+        
+        .events-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .events-tab .badge {
+            background: var(--accent);
+            color: white;
+            border-radius: 10px;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            margin-left: 5px;
+        }
+        
+        /* Past Events */
+        .past-event-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .past-event-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        
+        .past-event-content {
+            flex: 1;
+        }
+        
+        .past-event-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .past-event-date i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+        
+        .past-event-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .past-event-desc {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .past-event-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            color: #666;
+        }
+        
+        .stat-item i {
+            margin-right: 5px;
+            color: var(--primary);
+        }
+        
+        /* My Events */
+        .my-event-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .my-event-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            position: relative;
+            border: none;
+            background: none;
+        }
+        
+        .my-event-tab.active {
+            color: var(--primary);
+        }
+        
+        .my-event-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .my-event-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .my-event-info {
+            flex: 1;
+        }
+        
+        .my-event-title {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .my-event-meta {
+            display: flex;
+            gap: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .my-event-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Rating System */
+        .rating-stars {
+            color: #ffc107;
+            margin: 10px 0;
+        }
+        
+        .rating-stars .far {
+            color: #ddd;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .empty-state h3 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        /* Call to Action */
+        .cta-section {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 10px;
+            margin: 50px 0;
+        }
+        
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .events-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .events-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .events-hero p {
+                font-size: 1rem;
+            }
+            
+            .past-event-card {
+                flex-direction: column;
+            }
+            
+            .past-event-image {
+                width: 100%;
+                height: 180px;
+                margin-bottom: 15px;
+            }
+            
+            .my-event-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .my-event-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+            
+            section {
+                padding: 30px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-options {
+                flex-direction: column;
+            }
+            
+            .filter-group {
+                min-width: 100%;
+            }
+            
+            .event-actions {
+                flex-direction: column;
+            }
+            
+            .event-actions .btn {
+                width: 100%;
+            }
+            
+            .search-bar input {
+                padding: 12px 15px;
+            }
+            
+            .search-bar button {
+                padding: 8px 15px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .nav-links {
+                display: flex !important;
+            }
+            .mobile-menu {
+                display: none !important;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .fade-out {
+            animation: fadeOut 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="home.html" class="logo">Campus<span>Link</span></a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="event.html" class="active">Events</a></li>
+                    <li><a href="talent.html">Talent Hub</a></li>
+                    <li><a href="collaborate.html">Collaborate</a></li>
+                    <li><a href="login.html" class="btn btn-secondary btn-sm">Login</a></li>
+                    
+                    <li><a href="student profile.html" class="btn btn-secondary btn-sm">profile </a></li>
+                    
+                </ul>
+                <div class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="events-hero">
+        <div class="container">
+            <h1>Upcoming Campus Events</h1>
+            <p>Discover workshops, seminars, and social gatherings to enhance your skills and expand your network</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Search events by name, department, or keyword...">
+                <button><i class="fas fa-search"></i> Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Events Filter -->
+        <section class="events-filter">
+            <h2>Find Your Perfect Event</h2>
+            <div class="filter-options">
+                <div class="filter-group">
+                    <h3>Event Type</h3>
+                    <select class="filter-select">
+                        <option>All Types</option>
+                        <option>Workshop</option>
+                        <option>Seminar</option>
+                        <option>Conference</option>
+                        <option>Social Gathering</option>
+                        <option>Hackathon</option>
+                        <option>Career Fair</option>
+                        <option>Exhibition</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h3>Department</h3>
+                    <select class="filter-select">
+                        <option>All Departments</option>
+                        <option>Computer Science</option>
+                        <option>Business</option>
+                        <option>Engineering</option>
+                        <option>Arts & Design</option>
+                        <option>Health Sciences</option>
+                        <option>Humanities</option>
+                        <option>Social Sciences</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h3>Date Range</h3>
+                    <select class="filter-select">
+                        <option>Upcoming Events</option>
+                        <option>Today</option>
+                        <option>This Week</option>
+                        <option>This Month</option>
+                        <option>Next 3 Months</option>
+                        <option>Past Events</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h3>Sort By</h3>
+                    <select class="filter-select">
+                        <option>Date (Soonest First)</option>
+                        <option>Date (Latest First)</option>
+                        <option>Most Popular</option>
+                        <option>Alphabetical</option>
+                        <option>Registration Deadline</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Tabs -->
+        <div class="events-tabs">
+            <button class="events-tab active" data-tab="upcoming">Upcoming Events</button>
+            <button class="events-tab" data-tab="past">Past Events</button>
+            <button class="events-tab" data-tab="my-events">My Events <span class="badge">2</span></button>
+            <button class="events-tab" data-tab="recommended">Recommended</button>
+        </div>
+
+        <!-- Upcoming Events (Default View) -->
+        <div id="upcoming-events" class="events-section">
+            <div class="events-grid">
+                <!-- Event 1 -->
+                <div class="event-card">
+                    <img src="images-2.jpeg" alt="tech conference" class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>July 30, 2023 | 3:00 PM - 5:00 PM | Computer Lab 3</span>
+                        </div>
+                        <div class="event-tags">
+                            <span class="event-tag">Computer Science</span>
+                            <span class="event-tag">Technology</span>
+                            <span class="event-tag">AI</span>
+                        </div>
+                        <h3>Tech Talk: AI in 2025</h3>
+                        <p>Join industry leaders as they discuss the future of artificial intelligence and its applications across various sectors. Perfect for CS students and tech enthusiasts.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-secondary">Register</a>
+                            <a href="event-detail.html" class="btn btn-outline">Details</a>
+                        </div>
+                        <div class="event-creator">
+                            <img src="splendor2.jpg" alt="Organizer" class="creator-avatar">
+                            <div class="creator-info">
+                                <h4>Prof. David Johnson</h4>
+                                <p>Computer Science Dept.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 2 -->
+                <div class="event-card">
+                    <img src="images-1.jpeg" alt="Startup Workshop" class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>August 5, 2023 | 10:00 AM - 12:00 PM | Business Building</span>
+                        </div>
+                        <div class="event-tags">
+                            <span class="event-tag">Business</span>
+                            <span class="event-tag">Entrepreneurship</span>
+                            <span class="event-tag">Startup</span>
+                        </div>
+                        <h3>Startup Workshop</h3>
+                        <p>Learn how to turn your ideas into successful businesses from experienced entrepreneurs and investors. Includes pitch practice sessions with feedback.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-secondary">Register</a>
+                            <a href="event-detail.html" class="btn btn-outline">Details</a>
+                        </div>
+                        <div class="event-creator">
+                            <img src="oche2.jpg" alt="Organizer" class="creator-avatar">
+                            <div class="creator-info">
+                                <h4>oche Williams</h4>
+                                <p>Business Incubator</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 3 -->
+                <div class="event-card">
+                    <img src="images-3.jpeg" alt="Art Exhibition" class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>August 12, 2023 | 2:00 PM - 6:00 PM | Creative Arts Center</span>
+                        </div>
+                        <div class="event-tags">
+                            <span class="event-tag">Arts</span>
+                            <span class="event-tag">Design</span>
+                            <span class="event-tag">Exhibition</span>
+                        </div>
+                        <h3>Annual Student Art Showcase</h3>
+                        <p>Showcase your creative work and network with visiting artists and gallery owners. All mediums welcome - digital, painting, sculpture, photography.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-secondary">Submit Work</a>
+                            <a href="event-detail.html" class="btn btn-outline">Details</a>
+                        </div>
+                        <div class="event-creator">
+                            <img src="j.jpg" alt="Organizer" class="creator-avatar">
+                            <div class="creator-info">
+                                <h4>Jessica esen</h4>
+                                <p>Arts Department</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 4 -->
+                <div class="event-card">
+                    <img src="h.jpeg" alt="Hackathon" class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>September 8-10, 2023 | 24-hour Event | Tech Hub</span>
+                        </div>
+                        <div class="event-tags">
+                            <span class="event-tag">Technology</span>
+                            <span class="event-tag">Competition</span>
+                            <span class="event-tag">Hackathon</span>
+                        </div>
+                        <h3>Annual Hackathon</h3>
+                        <p>48 hours of coding, collaboration, and innovation. Form teams and build something amazing! Prizes for top projects. Food and drinks provided.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-secondary">Register Team</a>
+                            <a href="event-detail.html" class="btn btn-outline">Details</a>
+                        </div>
+                        <div class="event-creator">
+                            <img src="Dav.jpg" alt="Organizer" class="creator-avatar">
+                            <div class="creator-info">
+                                <h4>Taiwo David </h4>
+                                <p>Tech Club</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 5 -->
+                <div class="event-card">
+                    <img src="h2.jpeg" alt="Career Fair" class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>October 15, 2023 | 9:00 AM - 4:00 PM | Main Auditorium</span>
+                        </div>
+                        <div class="event-tags">
+                            <span class="event-tag">Career</span>
+                            <span class="event-tag">Networking</span>
+                            <span class="event-tag">Jobs</span>
+                        </div>
+                        <h3>Career Fair 2023</h3>
+                        <p>Connect with top employers and explore internship and job opportunities across various industries. Bring your CV and dress professionally.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-secondary">Register</a>
+                            <a href="event-detail.html" class="btn btn-outline">Details</a>
+                        </div>
+                        <div class="event-creator">
+                            <img src="e.jpg" alt="Organizer" class="creator-avatar">
+                            <div class="creator-info">
+                                <h4>emma sam</h4>
+                                <p>Career Services</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event 6 -->
+                <div class="event-card">
+                    <img src="h3.jpeg" alt="Research Symposium" class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>November 3, 2023 | 1:00 PM - 5:00 PM | Research Center</span>
+                        </div>
+                        <div class="event-tags">
+                            <span class="event-tag">Research</span>
+                            <span class="event-tag">Science</span>
+                            <span class="event-tag">Presentation</span>
+                        </div>
+                        <h3>Undergraduate Research Symposium</h3>
+                        <p>Present your research projects and learn about the groundbreaking work being done by your peers. Open to all disciplines.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-secondary">Submit Abstract</a>
+                            <a href="event-detail.html" class="btn btn-outline">Details</a>
+                        </div>
+                        <div class="event-creator">
+                            <img src="splendor.jpg" alt="Organizer" class="creator-avatar">
+                            <div class="creator-info">
+                                <h4>Dr. Lisa Park</h4>
+                                <p>Research Office</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="#" class="btn btn-outline">Load More Events</a>
+            </div>
+        </div>
+
+        <!-- Past Events Section -->
+        <div id="past-events" class="events-section" style="display: none;">
+            <div class="past-event-card">
+                <img src="https://source.unsplash.com/random/300x200/?graduation" alt="Graduation" class="past-event-image">
+                <div class="past-event-content">
+                    <div class="past-event-date">
+                        <i class="far fa-calendar-alt"></i> May 15, 2023 | 10:00 AM - 12:00 PM
+                    </div>
+                    <h3 class="past-event-title">Annual Graduation Ceremony</h3>
+                    <p class="past-event-desc">Celebrating the achievements of our graduating class of 2023 with keynote speaker Dr. Amina Mohammed.</p>
+                    <div class="past-event-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i> 450 attended
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-star"></i> 4.8/5 rating
+                        </div>
+                    </div>
+                </div>
+                <a href="event-detail.html" class="btn btn-outline">View Photos</a>
+            </div>
+
+            <div class="past-event-card">
+                <img src="https://source.unsplash.com/random/300x200/?hackathon" alt="Hackathon" class="past-event-image">
+                <div class="past-event-content">
+                    <div class="past-event-date">
+                        <i class="far fa-calendar-alt"></i> April 22-23, 2023
+                    </div>
+                    <h3 class="past-event-title">Spring Hackathon 2023</h3>
+                    <p class="past-event-desc">48 hours of intense coding competition with prizes for the most innovative projects.</p>
+                    <div class="past-event-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i> 120 participants
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-star"></i> 4.9/5 rating
+                        </div>
+                    </div>
+                </div>
+                <a href="event-detail.html" class="btn btn-outline">View Winners</a>
+            </div>
+
+            <div class="past-event-card">
+                <img src="https://source.unsplash.com/random/300x200/?conference" alt="Conference" class="past-event-image">
+                <div class="past-event-content">
+                    <div class="past-event-date">
+                        <i class="far fa-calendar-alt"></i> March 8, 2023 | 9:00 AM - 4:00 PM
+                    </div>
+                    <h3 class="past-event-title">Women in Tech Conference</h3>
+                    <p class="past-event-desc">Inspiring talks and workshops featuring successful women in the technology industry.</p>
+                    <div class="past-event-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i> 280 attended
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-star"></i> 4.7/5 rating
+                        </div>
+                    </div>
+                </div>
+                <a href="event-detail.html" class="btn btn-outline">View Recap</a>
+            </div>
+
+            <div class="past-event-card">
+                <img src="https://source.unsplash.com/random/300x200/?science-fair" alt="Science Fair" class="past-event-image">
+                <div class="past-event-content">
+                    <div class="past-event-date">
+                        <i class="far fa-calendar-alt"></i> February 10, 2023 | 1:00 PM - 4:00 PM
+                    </div>
+                    <h3 class="past-event-title">Science & Engineering Fair</h3>
+                    <p class="past-event-desc">Showcase of innovative student projects in science, technology, engineering, and mathematics.</p>
+                    <div class="past-event-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i> 320 attended
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-star"></i> 4.6/5 rating
+                        </div>
+                    </div>
+                </div>
+                <a href="event-detail.html" class="btn btn-outline">View Projects</a>
+            </div>
+            
+            <div class="text-center" style="margin-top: 30px;">
+                <a href="#" class="btn btn-outline">Load More Past Events</a>
+            </div>
+        </div>
+
+        <!-- My Events Section -->
+        <div id="my-events" class="events-section" style="display: none;">
+            <div class="my-event-tabs">
+                <button class="my-event-tab active" data-tab="registered">Registered</button>
+                <button class="my-event-tab" data-tab="attended">Attended</button>
+                <button class="my-event-tab" data-tab="created">Created</button>
+            </div>
+
+            <!-- Registered Events -->
+            <div id="registered-events" class="my-events-section">
+                <div class="my-event-item">
+                    <div class="my-event-info">
+                        <h3 class="my-event-title">Tech Talk: AI in 2024</h3>
+                        <div class="my-event-meta">
+                            <span><i class="far fa-calendar-alt"></i> July 30, 2023 | 3:00 PM</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Room 205</span>
+                        </div>
+                    </div>
+                    <div class="my-event-actions">
+                        <button class="btn btn-outline btn-sm">Add to Calendar</button>
+                        <button class="btn btn-sm">Cancel</button>
+                    </div>
+                </div>
+
+                <div class="my-event-item">
+                    <div class="my-event-info">
+                        <h3 class="my-event-title">Startup Workshop</h3>
+                        <div class="my-event-meta">
+                            <span><i class="far fa-calendar-alt"></i> August 5, 2023 | 10:00 AM</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Business Building</span>
+                        </div>
+                    </div>
+                    <div class="my-event-actions">
+                        <button class="btn btn-outline btn-sm">Add to Calendar</button>
+                        <button class="btn btn-sm">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attended Events -->
+            <div id="attended-events" class="my-events-section" style="display: none;">
+                <div class="my-event-item">
+                    <div class="my-event-info">
+                        <h3 class="my-event-title">Spring Hackathon 2023</h3>
+                        <div class="my-event-meta">
+                            <span><i class="far fa-calendar-alt"></i> April 22-23, 2023</span>
+                            <span><i class="fas fa-check-circle" style="color: var(--secondary);"></i> Attended</span>
+                        </div>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="my-event-actions">
+                        <button class="btn btn-outline btn-sm">Leave Review</button>
+                        <button class="btn btn-sm">View Photos</button>
+                    </div>
+                </div>
+
+                <div class="my-event-item">
+                    <div class="my-event-info">
+                        <h3 class="my-event-title">Women in Tech Conference</h3>
+                        <div class="my-event-meta">
+                            <span><i class="far fa-calendar-alt"></i> March 8, 2023</span>
+                            <span><i class="fas fa-check-circle" style="color: var(--secondary);"></i> Attended</span>
+                        </div>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="my-event-actions">
+                        <button class="btn btn-outline btn-sm">Leave Review</button>
+                        <button class="btn btn-sm">View Photos</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Created Events -->
+            <div id="created-events" class="my-events-section" style="display: none;">
+                <div class="empty-state">
+                    <i class="far fa-calendar-plus"></i>
+                    <h3>No Events Created Yet</h3>
+                    <p>You haven't created any events. Get started by organizing your first event!</p>
+                    <a href="create-event.html" class="btn">Create New Event</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommended Events Section -->
+        <div id="recommended-events" class="events-section" style="display: none;">
+            <div class="empty-state">
+                <i class="fas fa-user-plus"></i>
+                <h3>Personalized Recommendations</h3>
+                <p>Login to see events recommended based on your interests, department, and past attendance.</p>
+                <div style="display: flex; gap: 15px; justify-content: center;">
+                    <a href="login.html" class="btn btn-student">Student Login</a>
+                    <a href="login.html" class="btn btn-lecturer">Lecturer Login</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <h2>Have an event to share?</h2>
+            <p>Organizing a workshop, seminar, or campus activity? List it on CampusLink to reach the right audience.</p>
+            <a href="create-event.html" class="btn">Create New Event</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CampusLink</h3>
+                    <p>Your JPTS networking platform for talents, events, and collaborations.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="talent.html">Talent Hub</a></li>
+                        <li><a href="collaborate.html">Collaborate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on upcoming events</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit" class="btn btn-secondary btn-sm">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 CampusLink - JPTS. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            
+            // Change icon from bars to times when open
+            const icon = this.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenu.querySelector('i').classList.remove('fa-times');
+                mobileMenu.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // Enhanced Events Tab Switching
+        const eventTabs = document.querySelectorAll('.events-tab');
+        const eventSections = {
+            'upcoming': document.getElementById('upcoming-events'),
+            'past': document.getElementById('past-events'),
+            'my-events': document.getElementById('my-events'),
+            'recommended': document.getElementById('recommended-events')
+        };
+        
+        eventTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Switch main tabs
+                eventTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Hide all sections
+                Object.values(eventSections).forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show selected section
+                const tabName = tab.getAttribute('data-tab');
+                eventSections[tabName].style.display = 'block';
+                
+                // Reset my events sub-tabs if needed
+                if (tabName === 'my-events') {
+                    document.querySelector('.my-event-tab[data-tab="registered"]').click();
+                }
+            });
+        });
+
+        // My Events Sub-Tabs
+        const myEventTabs = document.querySelectorAll('.my-event-tab');
+        const myEventSections = {
+            'registered': document.getElementById('registered-events'),
+            'attended': document.getElementById('attended-events'),
+            'created': document.getElementById('created-events')
+        };
+        
+        myEventTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                myEventTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Hide all sections
+                Object.values(myEventSections).forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show selected section
+                const tabName = tab.getAttribute('data-tab');
+                myEventSections[tabName].style.display = 'block';
+            });
+        });
+
+        // Event Registration
+        document.querySelectorAll('.event-actions .btn-secondary').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const eventCard = this.closest('.event-card');
+                const eventTitle = eventCard.querySelector('h3').textContent;
+                
+                // Visual feedback
+                this.textContent = 'Registered!';
+                this.style.backgroundColor = '#27ae60';
+                
+                // Disable the button
+                this.disabled = true;
+                
+                // Change the details button
+                const detailsBtn = eventCard.querySelector('.btn-outline');
+                detailsBtn.textContent = 'View Ticket';
+                detailsBtn.style.borderColor = '#27ae60';
+                detailsBtn.style.color = '#27ae60';
+                
+                // In a real app, this would register the user for the event
+                setTimeout(() => {
+                    alert(`You've successfully registered for "${eventTitle}"`);
+                    // Update "My Events" tab badge
+                    const badge = document.querySelector('.events-tab[data-tab="my-events"] .badge');
+                    if (!badge) {
+                        const badgeEl = document.createElement('span');
+                        badgeEl.className = 'badge';
+                        badgeEl.textContent = '1';
+                        document.querySelector('.events-tab[data-tab="my-events"]').appendChild(badgeEl);
+                    } else {
+                        const current = parseInt(badge.textContent);
+                        badge.textContent = current + 1;
+                    }
+                }, 500);
+            });
+        });
+
+        // Cancel Registration
+        document.querySelectorAll('.my-event-actions .btn-sm:not(.btn-outline)').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const eventItem = this.closest('.my-event-item');
+                if (confirm('Are you sure you want to cancel your registration?')) {
+                    eventItem.classList.add('fade-out');
+                    setTimeout(() => {
+                        eventItem.remove();
+                        // Update badge count
+                        const badge = document.querySelector('.events-tab[data-tab="my-events"] .badge');
+                        if (badge) {
+                            const current = parseInt(badge.textContent);
+                            if (current > 1) {
+                                badge.textContent = current - 1;
+                            } else {
+                                badge.remove();
+                            }
+                        }
+                    }, 300);
+                }
+            });
+        });
+
+        // Search Functionality
+        const searchInput = document.querySelector('.search-bar input');
+        const searchButton = document.querySelector('.search-bar button');
+        
+        searchButton.addEventListener('click', function() {
+            if (searchInput.value.trim() !== '') {
+                alert(`Searching for: ${searchInput.value}`);
+                // In a real app, this would filter events
+            }
+        });
+        
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim() !== '') {
+                alert(`Searching for: ${this.value}`);
+                // In a real app, this would filter events
+            }
+        });
+
+        // Filter functionality
+        const filterSelects = document.querySelectorAll('.filter-select');
+        filterSelects.forEach(select => {
+            select.addEventListener('change', function() {
+                // In a real app, this would filter events based on selections
+                console.log(`Filter changed: ${this.value}`);
+            });
+        });
+
+        // Newsletter form
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input').value;
+                alert(`Thank you for subscribing with ${email}! You'll receive event updates.`);
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>

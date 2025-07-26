@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborate | CampusLink - JPTS Networking Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+    --primary: #3498db;
+    --primary-dark: #2980b9;
+    --secondary: #2ecc71;
+    --secondary-dark: #27ae60;
+    --dark: #2c3e50;
+    --light: #ecf0f1;
+    
+    --blue: #3498db;
+    --purple: #9b59b6;
+    --purple-dark: #8e44ad;
+    --orange: #e67e22;
+    --orange-dark: #d35400;
+    --yellow: #f1c40f;
+    --yellow-dark: #f39c12;
+    --gray: #95a5a6;
+    --light-gray: #f5f5f5;
+    --dark-gray: #7f8c8d;
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--dark);
+        }
+        
+        /* Hero Section */
+        .collab-hero {
+            background: linear-gradient(15deg, var(--blue), var(--accent));
+            color: white;
+            text-align: center;
+            padding: 150px 0 80px;
+            margin-top: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .collab-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://source.unsplash.com/random/1600x900/?collaboration') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .collab-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .collab-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .collab-hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: #27ae60;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--orange);
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background: #c0392b;
+        }
+        
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-lecturer {
+            background: var(--lecturer);
+        }
+        
+        .btn-lecturer:hover {
+            background: #8e44ad;
+        }
+        
+        .btn-student {
+            background: var(--student);
+        }
+        
+        .btn-student:hover {
+            background: #e67e22;
+        }
+        
+        /* Section Styling */
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--dark);
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        /* Project Showcase */
+        .project-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .project-tab {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .project-tab:hover {
+            color: var(--primary);
+        }
+        
+        .project-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .project-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 25px;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .project-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .project-meta span {
+            display: flex;
+            align-items: center;
+        }
+        
+        .project-meta i {
+            margin-right: 5px;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .project-tag {
+            background: #f0f7ff;
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .project-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Tools Section */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .tool-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .tool-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .tool-info p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(135deg, var(--purple), var(--dark));
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://source.unsplash.com/random/1600x900/?teamwork') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .testimonials .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonials .section-title h2,
+        .testimonials .section-title p {
+            color: white;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .testimonial-text::before {
+            content: '"';
+            font-size: 3rem;
+            color: rgba(255,255,255,0.2);
+            position: absolute;
+            top: -20px;
+            left: -15px;
+            line-height: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid white;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: white;
+            border-radius: 10px;
+            padding: 60px;
+            margin: 60px auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 900px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .cta-section p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: var(--light);
+            padding: 60px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .stat-card {
+            padding: 30px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .footer-about p {
+            color: #bbb;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-newsletter input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        .footer-newsletter input::placeholder {
+            color: #bbb;
+        }
+        
+        .footer-newsletter button {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .footer-newsletter button:hover {
+            background: #2980b9;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .section {
+                padding: 50px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-section {
+                padding: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .collab-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .collab-hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .project-actions {
+                flex-direction: column;
+            }
+            
+            .project-actions .btn {
+                width: 100%;
+            }
+            
+            .cta-section {
+                padding: 30px 20px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .nav-links {
+                display: flex !important;
+            }
+            .mobile-menu {
+                display: none !important;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        /* Hover Effects */
+        .hover-grow {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-grow:hover {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="home.html" class="logo">Campus<span>Link</span></a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="talent.html">Talent Hub</a></li>
+                    <li><a href="collaborate.html" class="active">Collaborate</a></li>
+                    
+                    <li><a href="student profile.html" class="btn btn-secondary btn-sm">profile </a></li>
+                    
+                    <li><a href="login.html" class="btn btn-secondary btn-sm">Login</a></li>
+                </ul>
+                <button class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section style="background-color : blue " class="collab-hero">
+        <div class="container">
+            <h1>Powerful Collaboration for Campus Innovators</h1>
+            <p>Connect with students, alumni, and faculty to bring your ideas to life. Find teammates, manage projects, and showcase your work all in one place.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-outline">Explore Projects</a>
+                <a href="#" class="btn">Start a Project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>How CampusLink Helps You Collaborate</h2>
+                <p>Our platform provides all the tools you need to find collaborators, manage projects, and showcase your work to the campus community.</p>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card hover-grow">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Find Your Team</h3>
+                    <p>Discover students with complementary skills who share your interests and vision for projects.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card hover-grow">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Project Management</h3>
+                    <p>Organize tasks, set milestones, and track progress with our intuitive project tools.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card hover-grow">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Document Collaboration</h3>
+                    <p>Work together in real-time on documents, presentations, and code with version control.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card hover-grow">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Discussion Boards</h3>
+                    <p>Share ideas, get feedback, and solve problems through dedicated project discussions.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card hover-grow">
+                    <div class="feature-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Virtual Meetings</h3>
+                    <p>Host video calls, screen sharing sessions, and brainstorming meetings with your team.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card hover-grow">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>File Sharing</h3>
+                    <p>Securely store and share project files with team members in one central location.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Active Projects</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2,300+</div>
+                    <div class="stat-label">Students Collaborating</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Faculty Mentors</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">75+</div>
+                    <div class="stat-label">Successful Launches</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Showcase -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Campus Projects</h2>
+                <p>Explore projects created by students and alumni across different disciplines and departments.</p>
+            </div>
+            
+            <div class="project-tabs">
+                <button class="project-tab active">All Projects</button>
+                <button class="project-tab">Technology</button>
+                <button class="project-tab">Business</button>
+                <button class="project-tab">Arts & Design</button>
+                <button class="project-tab">Research</button>
+                <button class="project-tab">Social Impact</button>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card hover-grow fade-in">
+                    <img src="https://source.unsplash.com/random/600x400/?app,development" alt="Campus App" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Campus Connect App</h3>
+                        <p class="project-description">A mobile app to help students navigate campus resources, events, and connect with peers.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-users"></i> 6 members</span>
+                            <span><i class="fas fa-clock"></i> 2 weeks ago</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">Mobile Dev</span>
+                            <span class="project-tag">UI/UX</span>
+                            <span class="project-tag">React Native</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-outline">View Details</button>
+                            <button class="btn btn-primary">Join Project</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card hover-grow fade-in">
+                    <img src="https://source.unsplash.com/random/600x400/?sustainability,garden" alt="Sustainability" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Campus Green Initiative</h3>
+                        <p class="project-description">Developing sustainable practices and awareness programs for eco-friendly campus operations.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-users"></i> 12 members</span>
+                            <span><i class="fas fa-clock"></i> 1 month ago</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">Sustainability</span>
+                            <span class="project-tag">Community</span>
+                            <span class="project-tag">Education</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-outline">View Details</button>
+                            <button class="btn btn-primary">Join Project</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card hover-grow fade-in">
+                    <img src="https://source.unsplash.com/random/600x400/?art,exhibition" alt="Art Collective" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Digital Art Collective</h3>
+                        <p class="project-description">Creating virtual exhibitions to showcase student artwork and digital creations.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-users"></i> 8 members</span>
+                            <span><i class="fas fa-clock"></i> 3 weeks ago</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">Art</span>
+                            <span class="project-tag">3D Modeling</span>
+                            <span class="project-tag">Web Design</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-outline">View Details</button>
+                            <button class="btn btn-primary">Join Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn btn-outline">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Integrated Collaboration Tools</h2>
+                <p>Everything you need to work effectively with your team, all in one platform.</p>
+            </div>
+            
+            <div class="tools-grid">
+                <!-- Tool 1 -->
+                <div class="tool-card hover-grow fade-in">
+                    <div class="tool-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>Real-time Chat</h3>
+                        <p>Instant messaging with file sharing, message history, and dedicated project channels.</p>
+                    </div>
+                </div>
+                
+                <!-- Tool 2 -->
+                <div class="tool-card hover-grow fade-in">
+                    <div class="tool-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>Task Management</h3>
+                        <p>Create, assign, and track tasks with deadlines, priorities, and progress tracking.</p>
+                    </div>
+                </div>
+                
+                <!-- Tool 3 -->
+                <div class="tool-card hover-grow fade-in">
+                    <div class="tool-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>Shared Calendar</h3>
+                        <p>Coordinate schedules, set milestones, and never miss important deadlines.</p>
+                    </div>
+                </div>
+                
+                <!-- Tool 4 -->
+                <div class="tool-card hover-grow fade-in">
+                    <div class="tool-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>Version Control</h3>
+                        <p>Track changes and collaborate on code or documents with built-in version history.</p>
+                    </div>
+                </div>
+                
+                <!-- Tool 5 -->
+                <div class="tool-card hover-grow fade-in">
+                    <div class="tool-icon">
+                        <i class="fas fa-poll"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>Polls & Surveys</h3>
+                        <p>Make group decisions quickly with built-in voting and survey tools.</p>
+                    </div>
+                </div>
+                
+                <!-- Tool 6 -->
+                <div class="tool-card hover-grow fade-in">
+                    <div class="tool-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>Faculty Integration</h3>
+                        <p>Connect with professors for mentorship, feedback, and academic collaboration.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Students Say</h2>
+                <p>Hear from students who have found success through campus collaborations.</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-text">
+                        CampusLink helped me find the perfect team for my startup idea. We went from concept to prototype in just 3 months!
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Aisha Mohammed" class="testimonial-avatar">
+                        <div class="author-info">
+                            <h4>Aisha Mohammed</h4>
+                            <p>Computer Science '22, Founder of StudyBuddy</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-text">
+                        The collaboration tools made it so easy to manage our research project across different departments. We published our paper in a peer-reviewed journal!
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="David Okafor" class="testimonial-avatar">
+                        <div class="author-info">
+                            <h4>David Okafor</h4>
+                            <p>Biochemistry '23, Research Team Lead</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-text">
+                        As an art student, I never thought I'd work with engineers. Together we created an interactive art installation that won a national competition!
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Chioma Eze" class="testimonial-avatar">
+                        <div class="author-info">
+                            <h4>Chioma Eze</h4>
+                            <p>Fine Arts '21, Creative Director</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="container">
+            <div class="cta-section fade-in">
+                <h2>Ready to Start Collaborating?</h2>
+                <p>Join hundreds of students who are already working together on exciting projects, research, and startups.</p>
+                <div class="cta-buttons">
+                    <a href="register.html" class="btn btn-student">Student Sign Up</a>
+                    <a href="register.html" class="btn btn-lecturer">Lecturer Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-about">
+                    <h3>About CampusLink</h3>
+                    <p>Connecting students, alumni, and faculty to foster collaboration, innovation, and professional growth across JPTS campuses.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="talent.html">Talent Hub</a></li>
+                        <li><a href="collaborate.html">Collaborate</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column footer-newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on new features and opportunities.</p>
+                    <input type="email" placeholder="Your email address">
+                    <button>Subscribe</button>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 CampusLink - JPTS Networking Platform. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenu.querySelector('i').classList.remove('fa-times');
+                mobileMenu.querySelector('i').classList.add('fa-bars');
+            });
+        });
+        
+        // Project Tab Switching
+        const projectTabs = document.querySelectorAll('.project-tab');
+        
+        projectTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                projectTabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // In a real implementation, you would filter projects here
+                console.log(`Filtering projects by: ${this.textContent}`);
+            });
+        });
+        
+        // Join Project Button Animation
+        document.querySelectorAll('.project-actions .btn-primary').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const originalText = this.textContent;
+                this.textContent = 'Request Sent!';
+                this.style.backgroundColor = '#27ae60';
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.backgroundColor = '';
+                }, 2000);
+            });
+        });
+        
+        // Fade-in animation for elements when scrolling
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Set initial state
+        fadeElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        // Check on load
+        window.addEventListener('load', fadeInOnScroll);
+        
+        // Check on scroll
+        window.addEventListener('scroll', fadeInOnScroll);
+    </script>
+</body>
+</html>
